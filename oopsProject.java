@@ -38,23 +38,23 @@ class library{
     }
 
     void submition(int amt, int bookcode1, String bookname1){
-        if(amt!=0 && bal>=amt){
+        if(bal<amt){
+            System.out.println("You don't have valid no. of issued book");
+        }
+        else if(amt!=0 && bal>=amt){
             bal-=amt;
             prevEntry=-amt;
             bookcode = bookcode1;
             bookname = bookname1;
         }
-        else if(bal<amt){
-            System.out.println("Please enter correct details");
-        }
     }
 
     void getPreviousentry(){
         if(prevEntry>0){
-            System.out.println("Submitted: "+prevEntry);
+            System.out.println("Issued: "+prevEntry);
         }
         else if(prevEntry<0){
-            System.out.println("Issued: "+Math.abs(prevEntry));
+            System.out.println("Submitted: "+Math.abs(prevEntry));
         }
         else{
             System.out.println("Nothing changed");
@@ -63,6 +63,7 @@ class library{
 
     void menu(){
         char option;
+        int x;
         Scanner sc=new Scanner(System.in);
         System.out.println("Welcome "+customerName);
         System.out.println("Your ID:"+Rollno);
@@ -91,28 +92,37 @@ class library{
                     System.out.println("Enter the number of books to be submitted :");
                     System.out.println("......................");
                     int amt=sc.nextInt();
-                    System.out.println("Enter a bookcode :");
-                    System.out.println("......................");
-                    int bookcode=sc.nextInt();
-                    System.out.println("Enter a bookname :");
-                    System.out.println("......................");
-                    String bookname=sc.next();
-                    submition(amt,bookcode,bookname);
-                    System.out.println("\n");
+                    x = amt;
+                    do{
+                        System.out.println("Enter a bookcode :");
+                        System.out.println("......................");
+                        int bookcode=sc.nextInt();
+                        System.out.println("Enter a bookname :");
+                        System.out.println("......................");
+                        String bookname=sc.next();
+                        submition(amt,bookcode,bookname);
+                        System.out.println("\n"); 
+                        x--;
+                    }while(x >=1);
+                    
                     break;
                 case 'c':
                     System.out.println("......................");
                     System.out.println("Enter a no of books to be issued :");
                     int amtW=sc.nextInt();
                     System.out.println("......................");
-                    System.out.println("Enter a bookcode :");
-                    bookcode=sc.nextInt();
-                    System.out.println("......................");
-                    System.out.println("Enter a bookname :");
-                    bookname = sc.next();
-                    System.out.println("......................");
-                    issue(amtW,bookcode,bookname);
-                    System.out.println("\n");
+                    x = amtW;
+                    do{
+                        System.out.println("Enter a bookcode :");
+                        bookcode=sc.nextInt();
+                        System.out.println("......................");
+                        System.out.println("Enter a bookname :");
+                        bookname = sc.next();
+                        System.out.println("......................");
+                        issue(amtW,bookcode,bookname);
+                        System.out.println("\n");
+                        x--;
+                    }while(x >= 1);
                     break;
                 case 'd':
                     System.out.println("......................");
